@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+
+<robot name="mrm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <!-- BGN - Include -->
+  <xacro:include filename="$(find velodyne_description)/urdf/robot_parameters.xacro" />
+  <xacro:include filename="$(find velodyne_description)/urdf/links_joints.xacro" />
+  <!-- END - Include -->
+  
+  <!-- BGN - Robot description -->
+  <m_link_box name="${link_00_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="1024"
+              ixx="170.667" ixy="0" ixz="0"
+              iyy="170.667" iyz="0"
+              izz="170.667"
+              size="1 1 1" />
+              
+  <m_joint name="${link_00_name}__${link_01_name}" type="revolute"
+           axis_xyz="0 0 1"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.5"
+           parent="base_link" child="link_01" />
+           
+  <m_link_cylinder name="${link_01_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.2"
+              mass="157.633"
+              ixx="13.235" ixy="0" ixz="0"
+              iyy="13.235" iyz="0"
+              izz="9.655"
+              length="0.4" radius="0.35" />
+              
+  <m_joint name="${link_01_name}__${link_02_name}" type="revolute"
+           axis_xyz="0 1 0"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.4"
+           parent="link_01" child="link_02" />
+           
+  <m_link_cylinder name="${link_02_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.4"
+              mass="57.906"
+              ixx="12.679" ixy="0" ixz="0"
+              iyy="12.679" iyz="0"
+              izz="0.651"
+              radius="0.15" length="0.8" />
+              
+  <m_joint name="${link_02_name}__${link_03_name}" type="revolute"
+           axis_xyz="0 1 0"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.8"
+           parent="link_02" child="link_03" />
+           
+  <m_link_cylinder name="${link_03_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.4"
+              mass="57.906"
+              ixx="12.679" ixy="0" ixz="0"
+              iyy="12.679" iyz="0"
+              izz="0.651"
+              radius="0.15" length="0.8" />
+              
+  <m_joint name="${link_03_name}__${link_04_name}" type="revolute"
+           axis_xyz="0 1 0"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.8"
+           parent="link_03" child="link_04" />
+           
+  <m_link_cylinder name="${link_04_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.4"
+              mass="57.906"
+              ixx="12.679" ixy="0" ixz="0"
+              iyy="12.679" iyz="0"
+              izz="0.651"
+              radius="0.15" length="0.8" />
+              
+  <m_joint name="${link_04_name}__${link_05_name}" type="revolute"
+           axis_xyz="0 0 1"
+           origin_rpy="0 0 0" origin_xyz="0 0 0.8"
+           parent="link_04" child="link_05" />
+           
+  <m_link_cylinder name="${link_05_name}"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.125"
+              mass="18.056"
+              ixx="0.479" ixy="0" ixz="0"
+              iyy="0.479" iyz="0"
+              izz="0.204"
+              radius="0.15" length="0.25" />
+  <!-- END - Robot description -->
+  
+</robot>

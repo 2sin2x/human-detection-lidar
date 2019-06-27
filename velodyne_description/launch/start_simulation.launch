@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+  <arg name="world_name" default="$(find velodyne_description)/world/ok.world"/>
+    <arg name="remap" default="true"/>
+
+<group if="$(arg remap)">
+    <remap from="/arm_controller/follow_joint_trajectory" to="/joint_trajectory_action"/>
+    <remap from="/arm_controller/state" to="/feedback_states"/>
+    <remap from="/arm_controller/command" to="/joint_path_command"/>
+
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+  </include>
+</group>
+
+<group unless="$(arg remap)">
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+  </include>
+</group>
+ 
+  <!-- Spawn the example robot -->
+  <param name="sensorV" command="$(find xacro)/xacro --inorder '$(find velodyne_description)/urdf/example.urdf.xacro'" />
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_model" args="-urdf -param sensorV -model example"/>
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+    <remap from="robot_description" to="sensorV"/>
+  </node>
+
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find kuka_kr10_gazebo)/urdf/kr10.xacro'"/>
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_kuka" pkg="gazebo_ros" type="spawn_model"
+      output="screen" respawn="false"
+      args="-urdf
+            -param robot_description
+            -model kuka_kr10
+            -x 0.0
+            -y 0.0
+            -z 0.0
+            -R 0.0
+            -P 0.0
+            -Y 0.0" />
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="kuka_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+  </node>
+
+  <!-- load the joint state controller -->
+  <rosparam file="$(find kuka_kr10_gazebo)/config/joint_state_controller.yaml" command="load" />
+  <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" args="joint_state_controller" />
+
+  <!-- load the arm controller -->
+  <rosparam file="$(find kuka_kr10_gazebo)/config/kr10_arm_controller.yaml" command="load" />
+  <node name="kuka_kr10_controller_spawner" pkg="controller_manager" type="spawner" args="arm_controller" />
+
+ <!-- RViz -->
+  <arg name="rviz" default="true"/>
+  <node if="$(arg rviz)" pkg="rviz" type="rviz" name="$(anon rviz)" respawn="false" output="screen" args="-d $(find velodyne_description)/rviz/example.rviz" />
+</launch>
