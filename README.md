@@ -1,6 +1,7 @@
 # human-detection-lidar
 
 For simulation:
+
 roslaunch velodyne_description start_simulation.launch
 
 rosrun my_pcl_tutorial sub_simulation
@@ -14,7 +15,10 @@ rosrun robot_pose_publisher robot_pose_publisher_modified
 roslaunch kuka_kr10_moveit_config demo.launch
 
 
+
+
 For use with .bag:
+
 roscore
 
 rosbag play -l bognar_bag.bag
