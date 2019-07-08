@@ -4,7 +4,7 @@
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
-
+#include <pcl/filters/passthrough.h>
 #include <pcl/filters/voxel_grid.h>
 
 ros::Publisher pub;
@@ -29,6 +29,7 @@ cloud_cb (const sensor_msgs::PointCloud2ConstPtr& cloud_msg)
   // Convert to ROS data type
   sensor_msgs::PointCloud2 output;
   pcl_conversions::moveFromPCL(cloud_filtered, output);
+
 
   // Publish the data
   pub.publish (output);

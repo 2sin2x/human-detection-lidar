@@ -6,7 +6,7 @@
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
   <arg name="verbose" default="false"/>
-  <arg name="world_name" default="$(find velodyne_description)/world/ok.world"/>
+  <arg name="world_name" default="$(find velodyne_description)/world/ok_cone.world"/>
     <arg name="remap" default="true"/>
 
 <group if="$(arg remap)">

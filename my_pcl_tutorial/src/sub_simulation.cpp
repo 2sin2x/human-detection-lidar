@@ -2,6 +2,7 @@
 #include <geometry_msgs/Vector3.h>
 #include <pcl_ros/point_cloud.h>
 #include <pcl/point_types.h>
+
 #include <boost/foreach.hpp>
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
@@ -110,7 +111,7 @@ int main(int argc, char** argv)
 
   ros::init(argc, argv, "sub_pcl");
   ros::NodeHandle nh;
-  ros::Subscriber sub = nh.subscribe<PointCloud>("velodyne_obstacles", 1, callback);
+  ros::Subscriber sub = nh.subscribe<PointCloud>("velodyne_obstacles_new", 1, callback);
   ros::Subscriber vectorSub_vel_position = nh.subscribe("vector_vel_position", 1, vectorCallback_vel_position);
   ros::Subscriber vectorSub1min = nh.subscribe("vector1min", 1, vectorCallback1min);
   ros::Subscriber vectorSub1max = nh.subscribe("vector1max", 1, vectorCallback1max);
@@ -125,6 +126,7 @@ int main(int argc, char** argv)
   ros::Publisher zone2_prediction_pub=nh.advertise<std_msgs::Bool>("zone2_prediction_detect", 1000);
   ros::Publisher zone3_prediction_pub=nh.advertise<std_msgs::Bool>("zone3_prediction_detect", 1000);
   ros::Subscriber vector_prediction = nh.subscribe("vector_prediction", 1, vector_prediction_callback);
+
 
   ros::Rate loop_rate(10);
   while (nh.ok()) {

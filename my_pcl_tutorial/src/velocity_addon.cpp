@@ -148,7 +148,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "velocity_addon");
   ros::NodeHandle nh;
 
-  ros::Subscriber sub = nh.subscribe<PointCloud>("velodyne_obstacles", 1, callback);
+  ros::Subscriber sub = nh.subscribe<PointCloud>("velodyne_obstacles_new", 1, callback);
   ros::Publisher marker_pub = nh.advertise<visualization_msgs::Marker>("visualization_marker", 1000);
   ros::Publisher vector_prediction = nh.advertise<geometry_msgs::Vector3>("vector_prediction", 1);
 

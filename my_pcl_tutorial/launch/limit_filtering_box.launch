@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<launch>
+  <node pkg="nodelet" type="nodelet" name="pcl_manager" args="manager" output="screen" />
+
+  <!-- Run a passthrough filter to clean NaNs -->
+  <node pkg="nodelet" type="nodelet" name="passthrough" args="load pcl/CropBox pcl_manager" output="screen">
+    <remap from="~input" to="/velodyne_obstacles" />
+    <remap from="~output" to="/velodyne_obstacles_new" />
+    <rosparam>
+      min_x: 3
+      max_x: 4
+
+      min_y: -1
+      max_y: 0
+
+      min_z: -1
+      max_z: 3
+
+      negative: True
+    </rosparam>
+  </node>
+</launch>
