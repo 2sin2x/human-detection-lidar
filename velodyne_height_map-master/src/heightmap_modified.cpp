@@ -123,11 +123,9 @@ void HeightMap::constructFullClouds(const VPointCloud::ConstPtr &scan,
             count_human=count_human+1;  
 		}
       }
-	  //if ((i==grid_dim_-1)&&(j==grid_dim_-1))
-      //ROS_INFO_STREAM(count_human);
     }
   }
-ROS_INFO_STREAM(count_human);
+  ROS_INFO_STREAM(count_human);
 }
 
 void HeightMap::constructGridClouds(const VPointCloud::ConstPtr &scan,
