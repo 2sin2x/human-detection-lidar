@@ -15,7 +15,7 @@
 #include <pluginlib/class_list_macros.h>
 #include <nodelet/nodelet.h>
 
-#include <velodyne_height_map/heightmap.h>
+#include <velodyne_height_map/heightmap_modified.h>
 
 namespace velodyne_height_map {
 

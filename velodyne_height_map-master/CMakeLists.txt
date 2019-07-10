@@ -35,6 +35,18 @@ target_link_libraries(heightmap_nodelet
                       ${Boost_LIBRARIES}
                       ${PCL_LIBRARIES})
 
+add_executable(heightmap_node_modified src/heightmap_node.cpp src/heightmap_modified.cpp)
+target_link_libraries(heightmap_node_modified
+                      ${catkin_LIBRARIES}
+                      ${Boost_LIBRARIES}
+                      ${PCL_LIBRARIES})
+
+add_library(heightmap_nodelet_modified src/heightmap_nodelet.cpp src/heightmap_modified.cpp)
+target_link_libraries(heightmap_nodelet_modified
+                      ${catkin_LIBRARIES}
+                      ${Boost_LIBRARIES}
+                      ${PCL_LIBRARIES})
+
 # install the files needed to run this package
 install(TARGETS heightmap_node
         RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

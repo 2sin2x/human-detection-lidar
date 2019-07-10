@@ -12,7 +12,7 @@
 */
 
 #include <ros/ros.h>
-#include <velodyne_height_map/heightmap.h>
+#include <velodyne_height_map/heightmap_modified.h>
 
 /** Main entry point. */
 int main(int argc, char **argv)
