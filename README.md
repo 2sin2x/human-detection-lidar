@@ -11,7 +11,7 @@ roslaunch my_pcl_tutorial limit_filtering_box.launch
 
 rosrun my_pcl_tutorial sub_simulation
 
-rosrun velodyne_height_map heightmap_node _grid_dimensions:=44 _cell_size:=0.25 _full_clouds:=true _height_threshold:=0.6
+rosrun velodyne_height_map heightmap_node_modified _grid_dimensions:=44 _cell_size:=0.25 _full_clouds:=true _height_threshold:=0.6
 
 rosrun my_pcl_tutorial velocity_addon
 
@@ -33,5 +33,5 @@ rosrun my_pcl_tutorial velocity_addon
 
 rosrun my_pcl_tutorial sub_borongaj
 
-rosrun velodyne_height_map heightmap_node _grid_dimensions:=40 _cell_size:=0.25 _full_clouds:=true _height_threshold:=0.2
+rosrun velodyne_height_map heightmap_node_modified _grid_dimensions:=40 _cell_size:=0.25 _full_clouds:=true _height_threshold:=0.2
 ```
