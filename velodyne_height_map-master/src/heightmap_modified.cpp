@@ -56,7 +56,7 @@ HeightMap::HeightMap(ros::NodeHandle node, ros::NodeHandle priv_nh)
   clear_publisher_ = node.advertise<VPointCloud>("velodyne_clear",1);  
 
   // subscribe to Velodyne data points
-  velodyne_scan_ = node.subscribe("velodyne_points", 10,
+  velodyne_scan_ = node.subscribe("velodyne_points_new", 10,
                                   &HeightMap::processData, this,
                                   ros::TransportHints().tcpNoDelay(true));
 }
@@ -109,15 +109,17 @@ void HeightMap::constructFullClouds(const VPointCloud::ConstPtr &scan,
     }
   }
 
+  // human detection
   int count_human=0;
   for (int i=0;i<grid_dim_;++i){
     for (int j=0;j<grid_dim_;++j){
       if ((init[i][j])&&(max[i][j] - min[i][j] > height_diff_threshold_)){
-        ROS_INFO_STREAM("["<<i<<","<<j<<"]");
-        if ((i<1)||(j<1))
-          count_human=1;
-        if ((i>0)&&(j>0)&&(j<grid_dim_-2)){
-		  if (((init[i-1][j])&&(max[i-1][j] - min[i-1][j] > height_diff_threshold_))||((init[i][j-1])&&(max[i][j-1] - min[i][j-1] > height_diff_threshold_))||((init[i-1][j+1])&&(max[i-1][j+1] - min[i-1][j+1] > height_diff_threshold_))||((init[i-1][j+2])&&(max[i-1][j+2] - min[i-1][j+2] > height_diff_threshold_)))
+       // ROS_INFO_STREAM("["<<i<<","<<j<<"]");
+        if ((i>0)&&(j>0)&&(j<grid_dim_-1)&&(i<grid_dim_-1)){
+/*
+		  if (((init[i-1][j])&&(max[i-1][j] - min[i-1][j] > height_diff_threshold_))||((init[i-1][j+1])&&(max[i-1][j+1] - min[i-1][j+1] > height_diff_threshold_))||((init[i][j+1])&&(max[i][j+1] - min[i][j+1] > height_diff_threshold_))||((init[i+1][j+1])&&(max[i+1][j+1] - min[i+1][j+1] > height_diff_threshold_))||((init[i+1][j])&&(max[i+1][j] - min[i+1][j] > height_diff_threshold_))||((init[i+1][j-1])&&(max[i+1][j-1] - min[i+1][j-1] > height_diff_threshold_))||((init[i][j-1])&&(max[i][j-1] - min[i][j-1] > height_diff_threshold_))||((init[i-1][j-1])&&(max[i-1][j-1] - min[i-1][j-1] > height_diff_threshold_)))
+*/
+     	  if (((init[i-1][j])&&(max[i-1][j] - min[i-1][j] > height_diff_threshold_))||((init[i-1][j+1])&&(max[i-1][j+1] - min[i-1][j+1] > height_diff_threshold_))||((init[i][j-1])&&(max[i][j-1] - min[i][j-1] > height_diff_threshold_))||((init[i-1][j-1])&&(max[i-1][j-1] - min[i-1][j-1] > height_diff_threshold_)))
 			count_human=count_human;
 		  else
             count_human=count_human+1;  
@@ -125,7 +127,8 @@ void HeightMap::constructFullClouds(const VPointCloud::ConstPtr &scan,
       }
     }
   }
-  ROS_INFO_STREAM(count_human);
+  std::cout<<count_human<<" human(s) detected"<<std::endl;
+  //ROS_INFO_STREAM(count_human);
 }
 
 void HeightMap::constructGridClouds(const VPointCloud::ConstPtr &scan,

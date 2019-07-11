@@ -111,7 +111,7 @@ int main(int argc, char** argv)
 
   ros::init(argc, argv, "sub_pcl");
   ros::NodeHandle nh;
-  ros::Subscriber sub = nh.subscribe<PointCloud>("velodyne_obstacles_new", 1, callback);
+  ros::Subscriber sub = nh.subscribe<PointCloud>("velodyne_obstacles", 1, callback);
   ros::Subscriber vectorSub_vel_position = nh.subscribe("vector_vel_position", 1, vectorCallback_vel_position);
   ros::Subscriber vectorSub1min = nh.subscribe("vector1min", 1, vectorCallback1min);
   ros::Subscriber vectorSub1max = nh.subscribe("vector1max", 1, vectorCallback1max);

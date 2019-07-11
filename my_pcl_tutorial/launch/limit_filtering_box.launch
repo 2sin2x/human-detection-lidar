@@ -4,8 +4,8 @@
 
   <!-- Run a passthrough filter to clean NaNs -->
   <node pkg="nodelet" type="nodelet" name="passthrough" args="load pcl/CropBox pcl_manager" output="screen">
-    <remap from="~input" to="/velodyne_obstacles" />
-    <remap from="~output" to="/velodyne_obstacles_new" />
+    <remap from="~input" to="/velodyne_points" />
+    <remap from="~output" to="/velodyne_points_new" />
     <rosparam>
       min_x: 3
       max_x: 4
