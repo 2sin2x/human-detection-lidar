@@ -25,7 +25,7 @@ roslaunch kuka_kr10_moveit_config demo.launch
 ```
 roscore
 
-rosbag play -l bognar_bag.bag
+rosbag play -l <bagfile>.bag
 
 rviz
 
