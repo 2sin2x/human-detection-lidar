@@ -3,10 +3,10 @@
 Change topic from **velodyne_points** to **velodyne_points_new** at 59. line in [heightmap_modified](https://github.com/2sin2x/human-detection-lidar/blob/master/velodyne_height_map-master/src/heightmap_modified.cpp) in order to work with simulation. For use with .bag use **velodyne_points**.
 
 ## Simulation results
-Simulation preview:
+### Simulation preview:
 ![](simulacija1.gif)
 
-Dynamic zones:
+### Dynamic zones:
 ![](dynamic_zone1.gif)
 
 ![](dynamic_zone2.gif)
