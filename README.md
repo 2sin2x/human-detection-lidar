@@ -8,12 +8,11 @@ Simulation preview:
 
 Dynamic zones:
 ![](dynamic_zone1.gif)
-![](dynamic_zone2.gif)
 
+![](dynamic_zone2.gif)
 
 ## Results with .bag
 ![](borongaj.gif)
-
 
 ## Start simulation:
 
