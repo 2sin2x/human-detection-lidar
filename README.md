@@ -11,6 +11,9 @@ Dynamic zones:
 
 ![](dynamic_zone2.gif)
 
+
+![](four_humans.png)
+
 ## Results with .bag
 ![](borongaj.gif)
 
