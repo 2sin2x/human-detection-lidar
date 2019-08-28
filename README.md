@@ -11,8 +11,10 @@ Change topic from **velodyne_points** to **velodyne_points_new** at 59. line in 
 
 ![](dynamic_zone2.gif)
 
-
+### Human count:
 ![](four_humans.png)
+
+![](six_humans.png)
 
 ## Results with .bag
 ![](borongaj.gif)
